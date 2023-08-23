@@ -10,7 +10,7 @@ using namespace cv;
 #define M_PI 3.14159265358979323846
 
 
-//ÅĞ¶ÏÒ»¸ö¶şÎ¬ÏòÁ¿ÖĞÊÇ·ñÓĞ·ÇÁãÖµ
+//åˆ¤æ–­ä¸€ä¸ªäºŒç»´å‘é‡ä¸­æ˜¯å¦æœ‰éé›¶å€¼
 bool any(const std::vector<std::vector<float>>& matrix) {
     for (const auto& row : matrix) {
         for (float value : row) {
@@ -23,7 +23,7 @@ bool any(const std::vector<std::vector<float>>& matrix) {
 }
 
 
-//x·½ÏòÁ¿»¯Ìİ¶È½Ç¶È
+//xæ–¹å‘é‡åŒ–æ¢¯åº¦è§’åº¦
 std::vector<std::vector<float>> quantizeAngles_x(const std::vector<std::vector<float>>& edge_angles) {
     std::vector<std::vector<float>> quantized_angles(edge_angles.size(), std::vector<float>(edge_angles[0].size(), 0.0));
 
@@ -37,9 +37,9 @@ std::vector<std::vector<float>> quantizeAngles_x(const std::vector<std::vector<f
 }
 
 
-//y·½ÏòÁ¿»¯Ìİ¶È½Ç¶È
+//yæ–¹å‘é‡åŒ–æ¢¯åº¦è§’åº¦
 std::vector<std::vector<float>> quantizeAngles_y(const std::vector<std::vector<float>>& edge_angles) {
-    // ´´½¨Ò»¸öÓë edge_angles ÏàÍ¬´óĞ¡µÄ¶şÎ¬ÏòÁ¿
+    // åˆ›å»ºä¸€ä¸ªä¸ edge_angles ç›¸åŒå¤§å°çš„äºŒç»´å‘é‡
     std::vector<std::vector<float>> quantized_angles(edge_angles.size(), std::vector<float>(edge_angles[0].size()));
 
     for (int i = 0; i < edge_angles.size(); ++i) {
@@ -53,10 +53,10 @@ std::vector<std::vector<float>> quantizeAngles_y(const std::vector<std::vector<f
 
 
 vector<vector<float>> marziliano_method_h(const vector<vector<int>>& edges, const vector<vector<int>>& image) {
-    // ÓÃÓÚ´æ´¢±ßÔµ¿í¶ÈµÄ¾ØÕó
+    // ç”¨äºå­˜å‚¨è¾¹ç¼˜å®½åº¦çš„çŸ©é˜µ
     vector<vector<float>> edge_widths(image.size(), vector<float>(image[0].size(), 0.0));
 
-    // ¼ÆËãÍ¼ÏñµÄÌİ¶È
+    // è®¡ç®—å›¾åƒçš„æ¢¯åº¦
     vector<vector<float>> gradient_y(image.size(), vector<float>(image[0].size(), 0.0));
     vector<vector<float>> gradient_x(image.size(), vector<float>(image[0].size(), 0.0));
     for (int row = 1; row < image.size() - 1; row++) {
@@ -66,7 +66,7 @@ vector<vector<float>> marziliano_method_h(const vector<vector<int>>& edges, cons
         }
     }
 
-    // ¼ÆËã±ßÔµµÄ½Ç¶È
+    // è®¡ç®—è¾¹ç¼˜çš„è§’åº¦
     vector<vector<float>> edge_angles(image.size(), vector<float>(image[0].size(), 0.0));
     for (int row = 0; row < image.size(); row++) {
         for (int col = 0; col < image[0].size(); col++) {
@@ -82,7 +82,7 @@ vector<vector<float>> marziliano_method_h(const vector<vector<int>>& edges, cons
         }
     }
 
-    // ¼ÆËã±ßÔµ¿í¶È
+    // è®¡ç®—è¾¹ç¼˜å®½åº¦
     float edge_ignore = 0.1;
     float finetune_number = 0.0;
     int finetune = 0;
@@ -182,10 +182,10 @@ vector<vector<float>> marziliano_method_h(const vector<vector<int>>& edges, cons
 
 
 vector<vector<float>> marziliano_method_v(const vector<vector<int>>& edges, const vector<vector<int>>& image) {
-    // ÓÃÓÚ´æ´¢±ßÔµ¿í¶ÈµÄ¾ØÕó
+    // ç”¨äºå­˜å‚¨è¾¹ç¼˜å®½åº¦çš„çŸ©é˜µ
     vector<vector<float>> edge_widths(image.size(), vector<float>(image[0].size(), 0.0));
 
-    // ¼ÆËãÍ¼ÏñµÄÌİ¶È
+    // è®¡ç®—å›¾åƒçš„æ¢¯åº¦
     vector<vector<float>> gradient_y(image.size(), vector<float>(image[0].size(), 0.0));
     vector<vector<float>> gradient_x(image.size(), vector<float>(image[0].size(), 0.0));
     for (int row = 1; row < image.size() - 1; row++) {
@@ -195,7 +195,7 @@ vector<vector<float>> marziliano_method_v(const vector<vector<int>>& edges, cons
         }
     }
 
-    // ¼ÆËã±ßÔµµÄ½Ç¶È
+    // è®¡ç®—è¾¹ç¼˜çš„è§’åº¦
     vector<vector<float>> edge_angles(image.size(), vector<float>(image[0].size(), 0.0));
     for (int row = 0; row < image.size(); row++) {
         for (int col = 0; col < image[0].size(); col++) {
@@ -211,7 +211,7 @@ vector<vector<float>> marziliano_method_v(const vector<vector<int>>& edges, cons
         }
     }
 
-    // ¼ÆËã±ßÔµ¿í¶È
+    // è®¡ç®—è¾¹ç¼˜å®½åº¦
     float edge_ignore = 0.1;
     float finetune_number = 0.0;
     int finetune = 0;
@@ -310,7 +310,7 @@ vector<vector<float>> marziliano_method_v(const vector<vector<int>>& edges, cons
 }
 
 
-//cv::Mat×ªstd::vector
+//cv::Matè½¬std::vector
 std::vector<std::vector<float>> mat2vector(const cv::Mat& mat) {
     int rows = mat.rows;
     int cols = mat.cols;
@@ -326,7 +326,7 @@ std::vector<std::vector<float>> mat2vector(const cv::Mat& mat) {
     return vec;
 }
 
-// int ÀàĞÍcv::Mat×ªstd::vector
+// int ç±»å‹cv::Matè½¬std::vector
 std::vector<std::vector<int>> mat2vector_int(const cv::Mat& mat) {
     int rows = mat.rows;
     int cols = mat.cols;
@@ -342,7 +342,7 @@ std::vector<std::vector<int>> mat2vector_int(const cv::Mat& mat) {
     return vec;
 }
 
-// bool ÀàĞÍcv::Mat×ªstd::vector
+// bool ç±»å‹cv::Matè½¬std::vector
 std::vector<std::vector<bool>> mat2vector_bool(const cv::Mat& mat) {
     int rows = mat.rows;
     int cols = mat.cols;
@@ -358,7 +358,7 @@ std::vector<std::vector<bool>> mat2vector_bool(const cv::Mat& mat) {
     return vec;
 }
 
-// std::vector×ªcv::Mat
+// std::vectorè½¬cv::Mat
 cv::Mat vector2mat(const std::vector<std::vector<float>>& vec) {
     int rows = vec.size();
     int cols = vec[0].size();
@@ -374,7 +374,7 @@ cv::Mat vector2mat(const std::vector<std::vector<float>>& vec) {
     return mat;
 }
 
-// int ÀàĞÍstd::vector×ªcv::Mat
+// int ç±»å‹std::vectorè½¬cv::Mat
 cv::Mat vector2mat_int(const std::vector<std::vector<int>>& vec) {
     int rows = vec.size();
     int cols = vec[0].size();
@@ -390,7 +390,7 @@ cv::Mat vector2mat_int(const std::vector<std::vector<int>>& vec) {
     return mat;
 }
 
-// bool ÀàĞÍstd::vector×ªcv::Mat
+// bool ç±»å‹std::vectorè½¬cv::Mat
 cv::Mat vector2mat_bool(const std::vector<std::vector<bool>>& vec) {
     int rows = vec.size();
     int cols = vec[0].size();
@@ -418,11 +418,11 @@ std::vector<std::vector<bool>> _simple_thinning(const std::vector<std::vector<fl
 
     for (int i = 0; i < num_rows; ++i) {
         for (int j = 0; j < num_cols; ++j) {
-            // ÈôÒ»¸öµã±È×óÓÒµÄsobelÖµ¶¼´ó£¬ÔòÎª1£¬·ñÔòÎª0
+            // è‹¥ä¸€ä¸ªç‚¹æ¯”å·¦å³çš„sobelå€¼éƒ½å¤§ï¼Œåˆ™ä¸º1ï¼Œå¦åˆ™ä¸º0
             bool x_condition = (j == 0 || strength[i][j] > strength[i][j - 1]) &&
                 (j == num_cols - 1 || strength[i][j] > strength[i][j + 1]);
 
-            // ÈôÒ»¸öµã±ÈÉÏÏÂµÄsobelÖµ¶¼´ó£¬ÔòÎª1£¬·ñÔòÎª0
+            // è‹¥ä¸€ä¸ªç‚¹æ¯”ä¸Šä¸‹çš„sobelå€¼éƒ½å¤§ï¼Œåˆ™ä¸º1ï¼Œå¦åˆ™ä¸º0
             bool y_condition = (i == 0 || strength[i][j] > strength[i - 1][j]) &&
                 (i == num_rows - 1 || strength[i][j] > strength[i + 1][j]);
 
@@ -435,12 +435,12 @@ std::vector<std::vector<bool>> _simple_thinning(const std::vector<std::vector<fl
 
 
 std::vector<std::vector<bool>> sobel_h(const cv::Mat& image) {
-    // sobelËã×Ó
+    // sobelç®—å­
     cv::Mat h1 = (cv::Mat_<float>(3, 3) << 0.25, 0.5, 0.25,
                                             0, 0, 0,
                                             -0.25, -0.5, -0.25);
 
-    // È¡ÏûÏÂÃæµÄ×¢ÊÍÒÔ»ñµÃ5x5µÄºË
+    // å–æ¶ˆä¸‹é¢çš„æ³¨é‡Šä»¥è·å¾—5x5çš„æ ¸
     /*
     cv::Mat h1 = (cv::Mat_<float>(5,5) << 1, 2, 0, -2, -1,
                                          4, 8, 0, -8, -4,
@@ -448,7 +448,7 @@ std::vector<std::vector<bool>> sobel_h(const cv::Mat& image) {
                                          4, 8, 0, -8, -4,
                                          1, 2, 0, -2, -1);
     */
-    // ¹éÒ»»¯h1
+    // å½’ä¸€åŒ–h1
     h1 = h1 / cv::sum(cv::abs(h1))[0];
 
     cv::Mat convoluted;
@@ -457,24 +457,24 @@ std::vector<std::vector<bool>> sobel_h(const cv::Mat& image) {
     cv::Mat strength2;
     cv::pow(convoluted, 2, strength2);
 
-    // ×ÔÊÊÓ¦ãĞÖµ
+    // è‡ªé€‚åº”é˜ˆå€¼
     cv::Mat strength1 = strength2.reshape(1, 1);
     cv::sort(strength1, strength1, cv::SORT_EVERY_ROW + cv::SORT_ASCENDING);
     float thresh2 = strength1.at<float>(0, static_cast<int>(strength1.cols * 0.99));
 
     cv::threshold(strength2, strength2, thresh2, 0, cv::THRESH_TOZERO);
 
-    return _simple_thinning(mat2vector(strength2));  // ¼ÙÉèÄãÔÚC++´úÂëÖĞ¶¨ÒåÁËÕâ¸öº¯Êı
+    return _simple_thinning(mat2vector(strength2));  // å‡è®¾ä½ åœ¨C++ä»£ç ä¸­å®šä¹‰äº†è¿™ä¸ªå‡½æ•°
 }
 
 
 std::vector<std::vector<bool>> sobel_v(const cv::Mat& image) {
-    // sobelËã×Ó
+    // sobelç®—å­
     cv::Mat h1 = (cv::Mat_<float>(3, 3) << 0.25, 0, -0.25,
         0.5, 0, -0.5,
         0.25, 0, -0.25);
 
-    // È¡ÏûÏÂÃæµÄ×¢ÊÍÒÔ»ñµÃ5x5µÄºË
+    // å–æ¶ˆä¸‹é¢çš„æ³¨é‡Šä»¥è·å¾—5x5çš„æ ¸
     /*
     cv::Mat h1 = (cv::Mat_<float>(5,5) << 1, 2, 0, -2, -1,
                                          4, 8, 0, -8, -4,
@@ -482,7 +482,7 @@ std::vector<std::vector<bool>> sobel_v(const cv::Mat& image) {
                                          4, 8, 0, -8, -4,
                                          1, 2, 0, -2, -1);
     */
-    // ¹éÒ»»¯h1
+    // å½’ä¸€åŒ–h1
     h1 = h1 / cv::sum(cv::abs(h1))[0];
 
     cv::Mat convoluted;
@@ -491,28 +491,28 @@ std::vector<std::vector<bool>> sobel_v(const cv::Mat& image) {
     cv::Mat strength2;
     cv::pow(convoluted, 2, strength2);
 
-    // ×ÔÊÊÓ¦ãĞÖµ
+    // è‡ªé€‚åº”é˜ˆå€¼
     cv::Mat strength1 = strength2.reshape(1, 1);
     cv::sort(strength1, strength1, cv::SORT_EVERY_ROW + cv::SORT_ASCENDING);
     float thresh2 = strength1.at<float>(0, static_cast<int>(strength1.cols * 0.99));
 
     cv::threshold(strength2, strength2, thresh2, 0, cv::THRESH_TOZERO);
 
-    return _simple_thinning(mat2vector(strength2));  // ¼ÙÉèÄãÔÚC++´úÂëÖĞ¶¨ÒåÁËÕâ¸öº¯Êı
+    return _simple_thinning(mat2vector(strength2));  // å‡è®¾ä½ åœ¨C++ä»£ç ä¸­å®šä¹‰äº†è¿™ä¸ªå‡½æ•°
 }
 
 
-//¼ÆËãÁ½µãÖ®¼äµÄ¾àÀë
+//è®¡ç®—ä¸¤ç‚¹ä¹‹é—´çš„è·ç¦»
 //float distance(const cv::Point2f& p1, const cv::Point2f& p2) {
 //    return cv::norm(p1 - p2);
 //}
 
 
-//×îÔ¶µã²ÉÑù
+//æœ€è¿œç‚¹é‡‡æ ·
 std::pair<std::vector<int>, cv::Mat> FPS(const cv::Mat& sample, int num) {
     int n = sample.rows;
     cv::Mat center;
-    cv::reduce(sample, center, 0, cv::REDUCE_AVG); // ¼ÆËãµãÔÆÖØĞÄ
+    cv::reduce(sample, center, 0, cv::REDUCE_AVG); // è®¡ç®—ç‚¹äº‘é‡å¿ƒ
     std::vector<int> selected;
     std::vector<float> min_distance(n);
 
@@ -521,7 +521,7 @@ std::pair<std::vector<int>, cv::Mat> FPS(const cv::Mat& sample, int num) {
     }
 
     int p0 = std::max_element(min_distance.begin(), min_distance.end()) - min_distance.begin();
-    selected.push_back(p0); // Ñ¡¾àÀëÖØĞÄ×îÔ¶µãp0
+    selected.push_back(p0); // é€‰è·ç¦»é‡å¿ƒæœ€è¿œç‚¹p0
 
     for (int i = 0; i < n; i++) {
         min_distance[i] = cv::norm(sample.row(p0) - sample.row(i));
@@ -548,13 +548,13 @@ std::pair<std::vector<int>, cv::Mat> FPS(const cv::Mat& sample, int num) {
 }
 
 
-// Ö´ĞĞµÍÍ¨ÂË²¨µÄº¯Êı
+// æ‰§è¡Œä½é€šæ»¤æ³¢çš„å‡½æ•°
 std::vector<int> lowPassFilter(const std::vector<int>& signal, float cutoff) {
-    std::vector<float> b(9, 0.0), a(9, 0.0); // ÂË²¨Æ÷ÏµÊı
-    int order = 8; // ÂË²¨Æ÷½×Êı
+    std::vector<float> b(9, 0.0), a(9, 0.0); // æ»¤æ³¢å™¨ç³»æ•°
+    int order = 8; // æ»¤æ³¢å™¨é˜¶æ•°
     float theta = 2.0 * M_PI * cutoff;
 
-    // Ê¹ÓÃButterworthÂË²¨Æ÷¹«Ê½¼ÆËãÂË²¨Æ÷ÏµÊı
+    // ä½¿ç”¨Butterworthæ»¤æ³¢å™¨å…¬å¼è®¡ç®—æ»¤æ³¢å™¨ç³»æ•°
     for (int i = 0; i <= order; i++) {
         float val = ((i == 0 || i == order) ? 1.0 : 2.0) * std::pow(std::sin((order - i) * theta / 2.0), order) / std::pow(2.0, order - 1);
         if (i % 2 == 0)
@@ -563,19 +563,19 @@ std::vector<int> lowPassFilter(const std::vector<int>& signal, float cutoff) {
             a[i] = val;
     }
 
-    std::vector<float> filteredSignal(signal.size(), 0.0); // ¹ıÂËºóµÄĞÅºÅ
+    std::vector<float> filteredSignal(signal.size(), 0.0); // è¿‡æ»¤åçš„ä¿¡å·
 
-    // ¶ÔĞÅºÅ½øĞĞÇ°Ïò-ºóÏòÂË²¨
+    // å¯¹ä¿¡å·è¿›è¡Œå‰å‘-åå‘æ»¤æ³¢
     for (int i = 0; i < signal.size(); i++) {
         float y = 0.0;
 
-        // Ç°ÏòÂË²¨
+        // å‰å‘æ»¤æ³¢
         for (int j = 0; j <= order; j++) {
             if (i - j >= 0)
                 y += b[j] * signal[i - j];
         }
 
-        // ºóÏòÂË²¨
+        // åå‘æ»¤æ³¢
         for (int j = 1; j <= order; j++) {
             if (i + j < signal.size())
                 y -= a[j] * filteredSignal[i + j];
@@ -584,10 +584,10 @@ std::vector<int> lowPassFilter(const std::vector<int>& signal, float cutoff) {
         filteredSignal[i] = y;
     }
 
-    // ½«¹ıÂËºóµÄĞÅºÅ×ª»»ÎªÕûÊı²¢²Ã¼ôÖµ
+    // å°†è¿‡æ»¤åçš„ä¿¡å·è½¬æ¢ä¸ºæ•´æ•°å¹¶è£å‰ªå€¼
     std::vector<int> filteredIntSignal(filteredSignal.size());
     for (int i = 0; i < filteredSignal.size(); i++) {
-        // ÊÖ¶¯½øĞĞÖµµÄ²Ã¼ô
+        // æ‰‹åŠ¨è¿›è¡Œå€¼çš„è£å‰ª
         if (filteredSignal[i] > 255)
             filteredIntSignal[i] = 255;
         else if (filteredSignal[i] < 0)
@@ -604,7 +604,7 @@ std::vector<int> lowPassFilter(const std::vector<int>& signal, float cutoff) {
 std::pair<int, std::pair<int, float>> compute_blur(std::string image_path, int rotation_angle) {
     Mat image_color = imread(image_path);
 
-    //ÇóÈ¡»Ò¶ÈÍ¼
+    //æ±‚å–ç°åº¦å›¾
     Mat image;
     cvtColor(image_color, image, COLOR_BGR2GRAY);
 
@@ -637,36 +637,36 @@ std::pair<int, std::pair<int, float>> compute_blur(std::string image_path, int r
 
     int height = img.rows;
     int width = img.cols;
-    int b_w = 320; // Í¼Ïñ¿éµÄ¿í¶È
-    int b_h = b_w; // Í¼Ïñ¿éµÄ¸ß¶È
-    int L = b_w * b_h; // Í¼Ïñ¿éµÄ³ß´ç
-    std::vector<float> ratiolisth; // ¼ÇÂ¼¿éµÄ±ßÔµÏñËØ±ÈÀıµÄÁĞ±í
-    std::vector<float> ratiolistv; // ¼ÇÂ¼¿éµÄ´¹Ö±·½Ïò±ßÔµÏñËØµÄÁĞ±í
-    float ignore_ratio = 0.1; // ¸÷¿é²»²ÎÓëÅÅĞòµÄ±ßÔµÏñËØµÄ±ÈÀı
+    int b_w = 320; // å›¾åƒå—çš„å®½åº¦
+    int b_h = b_w; // å›¾åƒå—çš„é«˜åº¦
+    int L = b_w * b_h; // å›¾åƒå—çš„å°ºå¯¸
+    std::vector<float> ratiolisth; // è®°å½•å—çš„è¾¹ç¼˜åƒç´ æ¯”ä¾‹çš„åˆ—è¡¨
+    std::vector<float> ratiolistv; // è®°å½•å—çš„å‚ç›´æ–¹å‘è¾¹ç¼˜åƒç´ çš„åˆ—è¡¨
+    float ignore_ratio = 0.1; // å„å—ä¸å‚ä¸æ’åºçš„è¾¹ç¼˜åƒç´ çš„æ¯”ä¾‹
 
-    std::vector<int> indexlist_h; // ¼ÇÂ¼×î³õÑ¡¿éµÄindex
-    std::vector<int> selected_index_h; // ¼ÇÂ¼Ñ¡ÖĞ¿éµÄindex
-    cv::Mat coordinate_list_h; // ¼ÇÂ¼×î³õÑ¡¿éµÄ×ø±ê
+    std::vector<int> indexlist_h; // è®°å½•æœ€åˆé€‰å—çš„index
+    std::vector<int> selected_index_h; // è®°å½•é€‰ä¸­å—çš„index
+    cv::Mat coordinate_list_h; // è®°å½•æœ€åˆé€‰å—çš„åæ ‡
     std::vector<int> indexlist_v;
     std::vector<int> selected_index_v;
     cv::Mat coordinate_list_v;
-    int block_num_h_ori = 20; // Ë®Æ½·½Ïò×î³õÑ¡¿éµÄÊıÄ¿
-    int block_num_v_ori = block_num_h_ori; // ´¹Ö±·½Ïò×î³õÑ¡¿éµÄÊıÄ¿
-    int blocknum_h = 9; // Ë®Æ½·½ÏòĞèÒªµÄ¿éµÄÊıÄ¿
-    int blocknum_v = blocknum_h; // ´¹Ö±·½ÏòĞèÒªµÄ¿éÊı
+    int block_num_h_ori = 20; // æ°´å¹³æ–¹å‘æœ€åˆé€‰å—çš„æ•°ç›®
+    int block_num_v_ori = block_num_h_ori; // å‚ç›´æ–¹å‘æœ€åˆé€‰å—çš„æ•°ç›®
+    int blocknum_h = 9; // æ°´å¹³æ–¹å‘éœ€è¦çš„å—çš„æ•°ç›®
+    int blocknum_v = blocknum_h; // å‚ç›´æ–¹å‘éœ€è¦çš„å—æ•°
 
-    int blocknum_final = 5; // ÓÃÀ´¼ÆËã×îÖÕÄ£ºı¶ÈµÄ¿éµÄ¸öÊı
+    int blocknum_final = 5; // ç”¨æ¥è®¡ç®—æœ€ç»ˆæ¨¡ç³Šåº¦çš„å—çš„ä¸ªæ•°
 
-    std::vector<std::vector<int>> bbox_list_h; // »­Ñ¡³öµÄË®Æ½¿ò
-    std::vector<std::vector<int>> bbox_list_v; // Ñ¡³öµÄ´¹Ö±¿ò
-    std::vector<std::vector<int>> bbox_list; // µ÷ÊÔÓÃ
-    int bbox_num = 0; // ¿òµÄ¸öÊı
+    std::vector<std::vector<int>> bbox_list_h; // ç”»é€‰å‡ºçš„æ°´å¹³æ¡†
+    std::vector<std::vector<int>> bbox_list_v; // é€‰å‡ºçš„å‚ç›´æ¡†
+    std::vector<std::vector<int>> bbox_list; // è°ƒè¯•ç”¨
+    int bbox_num = 0; // æ¡†çš„ä¸ªæ•°
 
     int bbox_num1 = bbox_num;
     int bbox_num2 = bbox_num;
 
-    int blockrow = floor(height / b_h); // Í¼Ïñ¿éĞĞÊı
-    int blockcol = floor(width / b_w); // Í¼Ïñ¿éÁĞÊı
+    int blockrow = floor(height / b_h); // å›¾åƒå—è¡Œæ•°
+    int blockcol = floor(width / b_w); // å›¾åƒå—åˆ—æ•°
 
     std::pair<std::vector<int>, cv::Mat> pair_FPS_h;
     std::pair<std::vector<int>, cv::Mat> pair_FPS_v;
@@ -674,19 +674,19 @@ std::pair<int, std::pair<int, float>> compute_blur(std::string image_path, int r
     std::vector<std::vector<bool>> sobel_h_edges = sobel_h(img);
     std::vector<std::vector<bool>> sobel_v_edges = sobel_v(img);
 
-    //¿é½á¹¹Ìå£¬´æ·ÅÒ»Î¬Ë÷Òı¼°¶şÎ¬×ø±ê
+    //å—ç»“æ„ä½“ï¼Œå­˜æ”¾ä¸€ç»´ç´¢å¼•åŠäºŒç»´åæ ‡
     struct Block {
         int index;
         std::pair<int, int> coordinates;
     };
 
-    // ¶ÔÍ¼ÏñµÄÃ¿Ò»ĞĞÓ¦ÓÃµÍÍ¨ÂË²¨Æ÷
+    // å¯¹å›¾åƒçš„æ¯ä¸€è¡Œåº”ç”¨ä½é€šæ»¤æ³¢å™¨
     std::vector<std::vector<int>> img_hfilted(height, std::vector<int>(width));
     for (int i = 0; i < height; i++) {
         img_hfilted[i] = lowPassFilter(std::vector<int>(img.row(i).begin<int>(), img.row(i).end<int>()), 0.1);
     }
 
-    // ¶ÔÍ¼ÏñµÄÃ¿Ò»ÁĞÓ¦ÓÃµÍÍ¨ÂË²¨Æ÷
+    // å¯¹å›¾åƒçš„æ¯ä¸€åˆ—åº”ç”¨ä½é€šæ»¤æ³¢å™¨
     std::vector<std::vector<int>> img_vfilted(height, std::vector<int>(width));
     for (int i = 0; i < width; i++) {
         std::vector<int> columnData(height);
@@ -699,7 +699,7 @@ std::pair<int, std::pair<int, float>> compute_blur(std::string image_path, int r
         }
     }
 
-    //È¥³ıÓÉÓÚĞı×ªµÄºÚ±ßµ¼ÖÂµÄ±ßÔµµã
+    //å»é™¤ç”±äºæ—‹è½¬çš„é»‘è¾¹å¯¼è‡´çš„è¾¹ç¼˜ç‚¹
     if (rotation_angle != 0) {
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
@@ -715,19 +715,19 @@ std::pair<int, std::pair<int, float>> compute_blur(std::string image_path, int r
         }
     }
 
-    // ¶¨Òå¼ÇÂ¼±ßÔµ¿í¶ÈºÍ±ê×¼²îµÄ¾ØÕó
-    cv::Mat edgewidth_h(selected_index_h.size(), blockcol, CV_32FC1);      // ¼ÇÂ¼¸÷¿éË®Æ½±ßÔµ¿í¶È
-    cv::Mat edgewidth_v(selected_index_h.size(), blockcol, CV_32FC1);      // ¼ÇÂ¼¸÷¿é´¹Ö±±ßÔµ¿í¶È
-    cv::Mat edgewidth_h_std(selected_index_h.size(), blockcol, CV_32FC1);  // ¼ÇÂ¼¸÷¿éË®Æ½±ßÔµ¿í¶ÈµÄ±ê×¼²î
-    cv::Mat edgewidth_v_std(selected_index_h.size(), blockcol, CV_32FC1);  // ¼ÇÂ¼¸÷¿é´¹Ö±±ßÔµ¿í¶ÈµÄ±ê×¼²î
+    // å®šä¹‰è®°å½•è¾¹ç¼˜å®½åº¦å’Œæ ‡å‡†å·®çš„çŸ©é˜µ
+    cv::Mat edgewidth_h(selected_index_h.size(), blockcol, CV_32FC1);      // è®°å½•å„å—æ°´å¹³è¾¹ç¼˜å®½åº¦
+    cv::Mat edgewidth_v(selected_index_h.size(), blockcol, CV_32FC1);      // è®°å½•å„å—å‚ç›´è¾¹ç¼˜å®½åº¦
+    cv::Mat edgewidth_h_std(selected_index_h.size(), blockcol, CV_32FC1);  // è®°å½•å„å—æ°´å¹³è¾¹ç¼˜å®½åº¦çš„æ ‡å‡†å·®
+    cv::Mat edgewidth_v_std(selected_index_h.size(), blockcol, CV_32FC1);  // è®°å½•å„å—å‚ç›´è¾¹ç¼˜å®½åº¦çš„æ ‡å‡†å·®
 
-    // Ñ­»·¼ÆËã±ßÔµ¿í¶ÈºÍ±ê×¼²î
+    // å¾ªç¯è®¡ç®—è¾¹ç¼˜å®½åº¦å’Œæ ‡å‡†å·®
     for (int i = 0; i < blockrow; i++) {
         for (int j = 0; j < blockcol; j++) {
             std::vector<std::vector<int>> edges_h_temp(b_h, std::vector<int>(b_w));
             std::vector<std::vector<int>> edges_v_temp(b_h, std::vector<int>(b_w));
 
-            // ÌáÈ¡µ±Ç°¿éµÄ±ßÔµÊı¾İ
+            // æå–å½“å‰å—çš„è¾¹ç¼˜æ•°æ®
             for (int m = 0; m < b_h; m++) {
                 for (int n = 0; n < b_w; n++) {
                     edges_h_temp[m][n] = sobel_h_edges[b_h * i + m][b_w * j + n];
@@ -735,7 +735,7 @@ std::pair<int, std::pair<int, float>> compute_blur(std::string image_path, int r
                 }
             }
 
-            // ±ß½çÏñËØÖÃ0£¬²»²ÎÓëÅÅĞò
+            // è¾¹ç•Œåƒç´ ç½®0ï¼Œä¸å‚ä¸æ’åº
             int ignore_pixels = static_cast<int>(ignore_ratio * b_w);
             for (int m = 0; m < b_h; m++) {
                 for (int n = 0; n < ignore_pixels; n++) {
@@ -755,7 +755,7 @@ std::pair<int, std::pair<int, float>> compute_blur(std::string image_path, int r
                 }
             }
 
-            // ¼ÆËã±ßÔµÏñËØ±ÈÀı
+            // è®¡ç®—è¾¹ç¼˜åƒç´ æ¯”ä¾‹
             float ratio_temp_h = 0.0;
             float ratio_temp_v = 0.0;
 
@@ -769,7 +769,7 @@ std::pair<int, std::pair<int, float>> compute_blur(std::string image_path, int r
             ratio_temp_h /= L;
             ratio_temp_v /= L;
 
-            // ´æ´¢±ßÔµÏñËØ±ÈÀı
+            // å­˜å‚¨è¾¹ç¼˜åƒç´ æ¯”ä¾‹
             ratiolisth.push_back(ratio_temp_h);
             ratiolistv.push_back(ratio_temp_v);
         }
@@ -778,10 +778,10 @@ std::pair<int, std::pair<int, float>> compute_blur(std::string image_path, int r
 
 
 
-    // x·½Ïò¼ÆËã
+    // xæ–¹å‘è®¡ç®—
     std::vector<Block> blocks;
 
-    // Éú³Éblocks£¬´æ´¢ËüÃÇµÄindexºÍcoordinates
+    // ç”Ÿæˆblocksï¼Œå­˜å‚¨å®ƒä»¬çš„indexå’Œcoordinates
     for (int i = 0; i < blockrow; ++i) {
         for (int j = 0; j < blockcol; ++j) {
             Block block;
@@ -791,7 +791,7 @@ std::pair<int, std::pair<int, float>> compute_blur(std::string image_path, int r
         }
     }
 
-    // ¸ù¾İratioµÄÖµ´ÓĞ¡µ½´óÅÅĞòblocks
+    // æ ¹æ®ratioçš„å€¼ä»å°åˆ°å¤§æ’åºblocks
     std::sort(blocks.begin(), blocks.end(), [&](const Block& b1, const Block& b2) {
         return ratiolisth[b1.index] < ratiolisth[b2.index];
         });
@@ -813,7 +813,7 @@ std::pair<int, std::pair<int, float>> compute_blur(std::string image_path, int r
         }
     }
     
-    //ÓÃ×îÔ¶µã²ÉÑùÑ¡Ôñ¿é
+    //ç”¨æœ€è¿œç‚¹é‡‡æ ·é€‰æ‹©å—
     pair_FPS_h = FPS(coordinate_list_h, blocknum_h);
     std::vector<int> index;
     cv::Mat selected_block;
@@ -855,7 +855,7 @@ std::pair<int, std::pair<int, float>> compute_blur(std::string image_path, int r
             edgewidth_h_std.at<float>(row - 1, col - 1) = static_cast<float>(stddev.val[0]);
         }
 
-        // È¥³ı3_sigmaÖ®ÍâµÄµãÖØĞÂ¼ÆËã¾ùÖµ
+        // å»é™¤3_sigmaä¹‹å¤–çš„ç‚¹é‡æ–°è®¡ç®—å‡å€¼
         cv::threshold(edgewidth_h_temp, edgewidth_h_temp,
             edgewidth_h.at<float>(row - 1, col - 1) - (3 * edgewidth_h_std.at<float>(row - 1, col - 1)),
             0, cv::THRESH_TOZERO);
@@ -875,7 +875,7 @@ std::pair<int, std::pair<int, float>> compute_blur(std::string image_path, int r
     }
 
     cv::Mat edgewidth_h_std_nonzero_index;
-    cv::findNonZero(edgewidth_h_std, edgewidth_h_std_nonzero_index); // Ä£ºı¶È·½²î²»ÎªÁãµÄ¿éµÄË÷Òı
+    cv::findNonZero(edgewidth_h_std, edgewidth_h_std_nonzero_index); // æ¨¡ç³Šåº¦æ–¹å·®ä¸ä¸ºé›¶çš„å—çš„ç´¢å¼•
 
     cv::Mat edgewidth_h_std_nonzero;
     for (int i = 0; i < edgewidth_h_std_nonzero_index.total(); i++) {
@@ -885,7 +885,7 @@ std::pair<int, std::pair<int, float>> compute_blur(std::string image_path, int r
     }
 
     cv::Mat edgewidth_h_nonzero_index;
-    cv::findNonZero(edgewidth_h, edgewidth_h_nonzero_index); // µÃµ½edgewidth_hÖĞ·ÇÁãÔªËØµÄË÷ÒıÖµ
+    cv::findNonZero(edgewidth_h, edgewidth_h_nonzero_index); // å¾—åˆ°edgewidth_hä¸­éé›¶å…ƒç´ çš„ç´¢å¼•å€¼
 
     cv::Mat edgewidth_h_nonzero;
     for (int i = 0; i < edgewidth_h_nonzero_index.total(); i++) {
@@ -895,7 +895,7 @@ std::pair<int, std::pair<int, float>> compute_blur(std::string image_path, int r
     }
 
     cv::Mat std_index;
-    cv::sortIdx(edgewidth_h_std_nonzero, std_index, cv::SORT_ASCENDING); // ½«·½²î´ÓĞ¡µ½´óÅÅĞòµÄË÷ÒıÖµ
+    cv::sortIdx(edgewidth_h_std_nonzero, std_index, cv::SORT_ASCENDING); // å°†æ–¹å·®ä»å°åˆ°å¤§æ’åºçš„ç´¢å¼•å€¼
 
     cv::Mat edgewidth_h_finalblk;
     for (int i = 0; i < blocknum_final; i++) {
@@ -906,10 +906,10 @@ std::pair<int, std::pair<int, float>> compute_blur(std::string image_path, int r
 
 
 
-    // y·½Ïò¼ÆËã
+    // yæ–¹å‘è®¡ç®—
     std::vector<Block> blocks_v;
 
-    // Éú³Éblocks£¬´æ´¢ËüÃÇµÄindexºÍcoordinates
+    // ç”Ÿæˆblocksï¼Œå­˜å‚¨å®ƒä»¬çš„indexå’Œcoordinates
     for (int i = 0; i < blockrow; ++i) {
         for (int j = 0; j < blockcol; ++j) {
             Block block;
@@ -919,7 +919,7 @@ std::pair<int, std::pair<int, float>> compute_blur(std::string image_path, int r
         }
     }
 
-    // ¸ù¾İratioµÄÖµ´ÓĞ¡µ½´óÅÅĞòblocks
+    // æ ¹æ®ratioçš„å€¼ä»å°åˆ°å¤§æ’åºblocks
     std::sort(blocks_v.begin(), blocks_v.end(), [&](const Block& b1, const Block& b2) {
         return ratiolistv[b1.index] < ratiolistv[b2.index];
         });
@@ -941,7 +941,7 @@ std::pair<int, std::pair<int, float>> compute_blur(std::string image_path, int r
         }
     }
 
-    //ÓÃ×îÔ¶µã²ÉÑùÑ¡Ôñ¿é
+    //ç”¨æœ€è¿œç‚¹é‡‡æ ·é€‰æ‹©å—
     pair_FPS_v = FPS(coordinate_list_v, blocknum_v);
     index = pair_FPS_v.first;
     selected_block = pair_FPS_v.second;
@@ -981,7 +981,7 @@ std::pair<int, std::pair<int, float>> compute_blur(std::string image_path, int r
             edgewidth_v_std.at<float>(row - 1, col - 1) = static_cast<float>(stddev.val[0]);
         }
 
-        // È¥³ı3_sigmaÖ®ÍâµÄµãÖØĞÂ¼ÆËã¾ùÖµ
+        // å»é™¤3_sigmaä¹‹å¤–çš„ç‚¹é‡æ–°è®¡ç®—å‡å€¼
         cv::threshold(edgewidth_v_temp, edgewidth_v_temp,
             edgewidth_v.at<float>(row - 1, col - 1) - (3 * edgewidth_v_std.at<float>(row - 1, col - 1)),
             0, cv::THRESH_TOZERO);
@@ -1001,7 +1001,7 @@ std::pair<int, std::pair<int, float>> compute_blur(std::string image_path, int r
     }
 
     cv::Mat edgewidth_v_std_nonzero_index;
-    cv::findNonZero(edgewidth_v_std, edgewidth_v_std_nonzero_index); // Ä£ºı¶È·½²î²»ÎªÁãµÄ¿éµÄË÷Òı
+    cv::findNonZero(edgewidth_v_std, edgewidth_v_std_nonzero_index); // æ¨¡ç³Šåº¦æ–¹å·®ä¸ä¸ºé›¶çš„å—çš„ç´¢å¼•
 
     cv::Mat edgewidth_v_std_nonzero;
     for (int i = 0; i < edgewidth_v_std_nonzero_index.total(); i++) {
@@ -1011,7 +1011,7 @@ std::pair<int, std::pair<int, float>> compute_blur(std::string image_path, int r
     }
 
     cv::Mat edgewidth_v_nonzero_index;
-    cv::findNonZero(edgewidth_v, edgewidth_v_nonzero_index); // µÃµ½edgewidth_hÖĞ·ÇÁãÔªËØµÄË÷ÒıÖµ
+    cv::findNonZero(edgewidth_v, edgewidth_v_nonzero_index); // å¾—åˆ°edgewidth_hä¸­éé›¶å…ƒç´ çš„ç´¢å¼•å€¼
 
     cv::Mat edgewidth_v_nonzero;
     for (int i = 0; i < edgewidth_v_nonzero_index.total(); i++) {
@@ -1021,7 +1021,7 @@ std::pair<int, std::pair<int, float>> compute_blur(std::string image_path, int r
     }
 
     cv::Mat std_index_v;
-    cv::sortIdx(edgewidth_v_std_nonzero, std_index_v, cv::SORT_ASCENDING); // ½«·½²î´ÓĞ¡µ½´óÅÅĞòµÄË÷ÒıÖµ
+    cv::sortIdx(edgewidth_v_std_nonzero, std_index_v, cv::SORT_ASCENDING); // å°†æ–¹å·®ä»å°åˆ°å¤§æ’åºçš„ç´¢å¼•å€¼
 
     cv::Mat edgewidth_v_finalblk;
     for (int i = 0; i < blocknum_final; i++) {
