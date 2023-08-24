@@ -1030,7 +1030,19 @@ std::pair<int, std::pair<int, float>> compute_blur(std::string image_path, int r
     }
 
 
-    return std::make_pair(1, std::make_pair(2, 3.3));
+    // 计算edgewidth_h_finalblk和edgewidth_v_finalblk的均值
+    float edgewidth_h_final = cv::mean(edgewidth_h_finalblk)[0];
+    float edgewidth_v_final = cv::mean(edgewidth_v_finalblk)[0];
+
+    // 计算blur_pixel
+    float blur_pixel = std::sqrt(edgewidth_h_final * edgewidth_h_final + edgewidth_v_final * edgewidth_v_final);
+
+    //取整
+    int rounded_edgewidth_h_final = static_cast<int>(std::round(edgewidth_h_final));
+    int rounded_edgewidth_v_final = static_cast<int>(std::round(edgewidth_v_final));
+
+
+    return std::make_pair(rounded_edgewidth_h_final, std::make_pair(rounded_edgewidth_v_final, blur_pixel));
 }
 
 
