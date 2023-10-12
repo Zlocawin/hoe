@@ -63,7 +63,9 @@ def polyfit_points(x, sample_min, sample_max, num_points, polygt):
 
     for y in y_list:
         # 生成随机噪声（-4 到 4 的整数）
-        noise = random.randint(-4, 4)
+        # noise = random.randint(-4, 4)
+        # 生成随机噪声（-3 到 3 的整数）
+        noise = random.randint(-3, 3)
         noise_y = y + noise
         y_list_noise.append(noise_y)
 
